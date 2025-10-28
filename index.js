@@ -1,13 +1,20 @@
 // index.js
 const nodemailer = require("nodemailer");
 
-// NÃO chame dotenv aqui em produção no Vercel (ele usa variáveis do painel).
-// Mas para testes locais, você pode habilitar dotenv:
-// require('dotenv').config();
+// require('dotenv').config(); // habilite localmente se usar .env
 
 module.exports = async (req, res) => {
+  // Permitir CORS (ajuste origins conforme necessidade)
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+
+  // Responder preflight
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
   if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
     return res.status(405).json({ success: false, message: "Method Not Allowed" });
   }
 
@@ -17,6 +24,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ success: false, message: "Campos obrigatórios ausentes." });
   }
 
+  // Lê variáveis de ambiente (defina no Vercel)
   const SMTP_USER = process.env.SMTP_USER;
   const SMTP_PASS = process.env.SMTP_PASS;
   const RECEIVER = process.env.RECEIVER_EMAIL;
@@ -34,35 +42,17 @@ module.exports = async (req, res) => {
       auth: { user: SMTP_USER, pass: SMTP_PASS }
     });
 
-    const info = await transporter.sendMail({
+    await transporter.sendMail({
       from: `"${name}" <${SMTP_USER}>`,
       to: RECEIVER,
       replyTo: email,
-      subject: `Nova solicitação de diagnóstico - ${company || "Pessoa Física"}`,
-      html: `
-        <h3>Nova solicitação de diagnóstico</h3>
-        <p><strong>Nome:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Email do cliente:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Empresa:</strong> ${escapeHtml(company || "N/A")}</p>
-        <p><strong>Mensagem:</strong></p>
-        <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
-      `
+      subject: `Nova solicitação - ${company || "Pessoa Física"}`,
+      text: `Nome: ${name}\nEmail: ${email}\nEmpresa: ${company || "N/A"}\n\n${message}`
     });
 
-    console.log("Email enviado, messageId:", info.messageId);
     return res.status(200).json({ success: true, message: "Email enviado com sucesso." });
   } catch (err) {
     console.error("Erro ao enviar email:", err);
     return res.status(500).json({ success: false, message: "Erro ao enviar email." });
   }
 };
-
-function escapeHtml(unsafe) {
-  if (!unsafe) return "";
-  return String(unsafe)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
