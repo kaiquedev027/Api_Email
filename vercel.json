@@ -13,9 +13,10 @@
         }
     ],
     "functions": {
-        "api/send.js": {
+        "index.js": {
             "memory": 512,
             "maxDuration": 10
         }
     }
+
 }
