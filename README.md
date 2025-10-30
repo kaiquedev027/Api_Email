@@ -24,12 +24,12 @@ dotenv – gerenciamento de variáveis de ambiente (localmente)
 
 📁 Estrutura do projeto
 
-projeto/
-├─ .env
-├─ index.js
+api_email/
+├─ api/send
+│      └─ Index.js
+├─ Readme.md
 ├─ package.json
 ├─ vercel.json
-└─ README.md
 
 
 ---
