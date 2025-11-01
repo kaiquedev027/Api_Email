@@ -8,15 +8,15 @@ O backend está hospedado na Vercel, e o frontend consome o endpoint /api/send v
 
 🚀 Tecnologias utilizadas
 
-Node.js + Express (ou função serverless)
+Node.js + Express 
 
 Nodemailer – envio de e-mails via SMTP
 
-Vercel Serverless Functions – hospedagem da API
-
-HTML + JavaScript – formulário de contato
+JavaScript – para formulário de contato
 
 dotenv – gerenciamento de variáveis de ambiente (localmente)
+
+Vercel Serverless Functions – hospedagem da API
 
 ## 🚀 Como Executar (Localmente)
 
