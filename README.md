@@ -25,8 +25,22 @@ dotenv – gerenciamento de variáveis de ambiente (localmente)
     git clone https://github.com/kaiquedev027/Api_Email.git
     cd Api_Email
     ```
+2.  **Baixe as dependencias:**
+    ```bash
+    npm init
+    npm install express  nodemailer  cors  body-parser  dotenv
+    ```
+2.  **Cole ao final do codigo do index.js:**
+    ```bash
+    const PORT = process.env.PORT || 3000;
+    const HOST = "0.0.0.0"; 
+
+    app.listen(PORT, HOST, () => {
+    console.log(`🚀 Server rodando em http://${HOST}:${PORT}`);
+    });
+    ```
 2.  **Inicie um servidor HTTP:**
     ```bash
-    python3 -m http.server 8000
+    node index.js
     ```
-3.  **Acesse no navegador:** `http://localhost:8000`
+3.  **Acesse no navegador:** `http://localhost:3000`
