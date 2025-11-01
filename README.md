@@ -18,3 +18,8 @@ HTML + JavaScript – formulário de contato
 
 dotenv – gerenciamento de variáveis de ambiente (localmente)
 
+**Clone o repositório:**
+    ```bash
+    git clone https://github.com/WuenderVoidrel/Sistema_Ia.git
+    cd Sistema_Ia
+    ```
