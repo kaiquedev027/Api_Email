@@ -18,8 +18,15 @@ HTML + JavaScript – formulário de contato
 
 dotenv – gerenciamento de variáveis de ambiente (localmente)
 
-**Clone o repositório:**
+## 🚀 Como Executar (Localmente)
+
+1.  **Clone o repositório:**
     ```bash
     git clone https://github.com/WuenderVoidrel/Sistema_Ia.git
     cd Sistema_Ia
     ```
+2.  **Inicie um servidor HTTP:**
+    ```bash
+    python3 -m http.server 8000
+    ```
+3.  **Acesse no navegador:** `http://localhost:8000`
