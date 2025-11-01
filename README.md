@@ -22,8 +22,8 @@ dotenv – gerenciamento de variáveis de ambiente (localmente)
 
 1.  **Clone o repositório:**
     ```bash
-    git clone https://github.com/WuenderVoidrel/Sistema_Ia.git
-    cd Sistema_Ia
+    git clone https://github.com/kaiquedev027/Api_Email.git
+    cd Api_Email
     ```
 2.  **Inicie um servidor HTTP:**
     ```bash
